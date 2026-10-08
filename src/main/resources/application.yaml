@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: subscription-service
+  datasource:
+    url: jdbc:h2:file:./data/subscriptions;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  output:
+    ansi:
+      enabled: always
+
+server:
+  error:
+    include-stacktrace: always
+    include-message: always
+
+app:
+  demo-seed: true
+
+onno:
+  scan-packages:
+    - app.subscriptions
+  ui:
+    locale: ru
+    login:
+      demo-accounts:
+        - label: Войти как администратор
+          username: admin
+          password: admin
+  auth:
+    mode: in-memory
+    session:
+      remember-me:
+        enabled: true
+        allow-ephemeral-key: true
+    users:
+      - username: admin
+        password: admin
+        roles: [ADMIN]
+
+org:
+  jobrunr:
+    background-job-server:
+      enabled: true
+    dashboard:
+      enabled: false
